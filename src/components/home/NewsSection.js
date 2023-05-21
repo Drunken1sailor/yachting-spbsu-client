@@ -38,7 +38,7 @@ export default class NewsSection extends Component {
 					<div className="newsSection__row row">
 						<div className="d-flex flex-column justify-content-between col-md-6">
 							<NewsElement/>
-							<a className="allNews__link" href="news.php">все новости →</a>
+							<a className="allNews__link" href="/news">все новости →</a>
 						</div>
 						<div className="col-md-6 scrollableContainer overflow-auto">
 							<div className="scrollable">
