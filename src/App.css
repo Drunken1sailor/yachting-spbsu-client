@@ -1,0 +1,606 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*==============================app.js==========================*/
+a:focus,a:active{outline: none;}
+a,a:visited{text-decoration: none;}
+h1,h2,h3,h4,h5,h6{font-size: inherit;font-weight: 400;} 
+@font-face{
+	font-family: 'SuisseIntl'; 
+	src: local('SuisseIntl'), url('./fonts/SuisseIntl-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face{
+	font-family: 'SuisseIntl'; 
+	src: local('SuisseIntl'), url('./fonts/SuisseIntl-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}
+h3{
+	font-size: 24px;
+	text-transform: uppercase;
+}
+body{
+	width: 100%;
+	height: 100%;
+}
+.root{
+	width: 100%;
+	min-height: 100%;
+}
+main{
+	font-family: 'SuisseIntl';
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	/*font-family: 'Noto Sans', sans-serif;*/
+}
+.wrapper{
+	width: 90%;
+	margin: 0 auto;
+}
+.regularText{
+	font-size: 18px;
+	text-align: justify;
+}
+.userAuthWindow_bg{
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 8;
+	background-color: rgba(0,0,0,0.5);
+}
+.userAuth{
+	position: fixed;
+	z-index: 9;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(255,255,255,1);
+}
+.userAuth form{
+	width: 500px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+.userAuth button{
+	width: 200px;
+	margin:0 auto;
+}
+.userAuth input{
+	margin-bottom: 15px;
+}
+/*==============================HomePage==========================*/
+
+/*=================navbar=================*/
+.navbar{
+	position: fixed;
+	z-index: 10;
+}
+.navbar .container{
+	display: flex;
+	justify-content: space-between;
+}
+.navbarCollapse{
+	margin:0;
+	padding:0;
+}
+.navForm{
+	display: flex;
+	align-items: center;
+	width: 300px;
+	height: 50px;
+}
+.navForm input{
+	width: 250px;
+	height: 40px;
+	margin: 0 10px 0 0;
+}
+.searchBtn{
+	background-color: none;
+	border:none;
+}
+.navImg{
+	transition: transform 0.3s ease 0s;
+}
+.navImg:hover{
+	transform: scale(1.1);
+}
+/*=================header=================*/
+.header{
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	z-index: 1;
+	display: flex;
+	justify-items: center;
+	align-items: center;
+}
+.header__bg::after{
+	content:'';
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	background-color:#000;
+	opacity: 0.1;
+}
+.header__bg{
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+.header__bg img{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+}
+.video_bg{
+	width: 100%;
+	min-height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	object-fit: cover;	
+}
+.header__title{
+	width: 800px;
+	position: relative;
+	z-index: 1;
+	/*padding: 50px 0 0;*/
+	/*background-color: rgba(255, 255, 255, 0.9);*/
+	border-radius: 50px;
+	/*box-shadow: 0 0 20px 2px #000;*/
+	text-align: left;
+	text-shadow: 1px 1px 0 #000;
+	color: #fff;
+}
+.title__text{
+	font-size: 28px;
+	line-height:1.1;
+	text-transform: uppercase;
+}
+.home__title__text::after{
+	content: '';
+	position: absolute;
+	top: 70px;
+	left: 0px;
+	width: 300px;
+	height: 3px;
+	background-color: #439BDC;
+}
+.subtitle{
+	margin: 20px 0 0;
+	font-size: 24px;
+}
+/*=================aboutSection=================*/
+.section{
+	width: 100%;
+	position: relative;
+	padding:50px 0;
+	z-index: 2;
+}
+.section__title{
+	align-self: flex-start;
+	margin: 0 auto 32px;
+	position: relative;
+	text-transform: uppercase;
+}
+.section__title::after{
+	content: '';
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	width: 100px;
+	height: 3px;
+	background-color: #439BDC;
+}
+.about__text{
+	text-align: justify;
+	line-height: 30px;
+	margin: 0 0 50px;
+}
+/*=================parallaxSection=================*/
+.parallaxSection{
+	height: 90vh;
+	padding:0;
+}
+.parallaxImg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 0; 
+}
+.parallaxImg::after{
+	content:'';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color:#fff;
+	opacity: 0.05;
+}
+.parallaxImg img{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+}
+/*=================newsSection=================*/
+.newsSection{
+	width: 100%;
+	position: relative;
+	padding-top:50px;
+}
+.newsSection__row{
+	height:500px;
+}
+.scrollableContainer{
+	height:500px;
+}
+.news__title{
+	font-size: 18px;
+	/*font-weight: 700;*/
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+.news__date{
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+.news__text{
+	font-size: 16px;
+	text-align: justify;
+	line-height: 20px;
+}
+.allNews__link{
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: 700;
+	color: #000;
+	letter-spacing: 1px;
+	transition: color 0.2s ease 0s;
+}
+.allNews__link:hover{
+	color: #439BDC;
+}
+/*=================participantsSection=================*/
+.participantsSection{
+	background-color: #161616;
+}
+.universities__img{
+	width: 240px;
+	height: 240px;
+	position: relative;
+	overflow: hidden;
+	margin:0 20px;
+	border: 4px solid #439BDC;
+	border-radius: 10px;
+	transition: transform 0.3s ease 0s;
+}
+.universities__img:hover{
+	transform: scale(1.05);
+}
+.universities__img img{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+}
+/*=================footer=================*/
+footer{
+	border-top: 1px solid #6E7161;
+}
+.contacts img{
+	width: 30px;
+	height: 30px;
+}
+.contact p{
+	margin: 0 0 0 15px;
+}
+.vkontakte:hover{
+	transform: scale(1.1);
+}
+/*==============================AdminPage==========================*/
+.adminPage{
+	background-color: #161616;
+	color:white;
+	min-height: 100%;
+	width: 100%;
+}
+.signIn{
+	position: relative;
+	z-index: 9;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(255,255,255,0.5);
+}
+.signIn form{
+	width: 500px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+.signIn button{
+	width: 100px;
+	margin:0 auto;
+}
+.signIn input{
+	margin-bottom: 15px;
+}
+/*==============================adminPanel==========================*/
+.adminPanel{
+	min-height: 100%;
+	background-color: #fff;
+	display: flex;
+}
+.sidebar{
+	flex:0 0 20%;
+	height: 100vh;
+	/*padding: 25px;*/
+	background-color: #141625;
+}
+.sidebar-title{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 100%;
+	height: 60px;
+	margin:0 0 30px;
+	background-color: #01050D;
+	text-align: center;
+}
+.sidebar-item{
+	display: flex;
+	align-items: center;
+	height: 40px;
+	position: relative;
+	margin: 10px;
+	padding:10px;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.3s ease 0s;
+	line-height: 20px;
+}
+.sidebar-item:hover{
+	background-color: #fff;
+	color: #000;
+}
+.sidebar-item:active{
+	background-color: #D3D3D3;
+	color: #000;
+}
+.sidebar-logout{
+	margin: 0 0 0 20px;
+}
+.adminPanelSection{
+	width: 100%;
+	height: 100vh;
+	color:#000;
+}
+/*=================AddNewsSection=================*/
+.newsDescriptionInput{
+	height: 100px;
+}
+
+
+/*==============================EventsPage==========================*/
+/*=================Header=================*/
+.events__header{
+	height: 500px;
+	background-color:#439BDC; 
+}
+.events__header_bg{
+	width: 100%;
+	height: 100%;
+}
+.events__header_bg img{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.events__header_bg::after{
+	content:'';
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	background-color:#000;
+	opacity: 0.5;
+}
+.events__title{
+
+	color:#fff;
+}
+.header__line{
+	position: relative;
+	width: 100%;
+	height: 3px;
+	background-color: #fff;
+	margin:50px 0 0;
+}
+/*=================EventsSection=================*/
+.eventsSection{
+	width: 100%;
+	position: relative;
+	padding-top:50px;
+}
+.eventsSection__row{
+	height:auto;
+}
+.eventsSection__col{
+	padding: 0 30px;
+}
+.event{
+	margin:0 0 100px;
+}
+.event__img{
+	display: block;
+	position: relative;
+	width: 100%;
+}
+.event__img__title{
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 80px;
+	top: 50%;
+  	transform: translateY(-50%);
+	left:0;
+	text-align: center;
+	text-transform: uppercase;
+	color:#fff;
+	font-weight: 700;
+	font-size: 24px;
+	background-color: rgba(0,0,0,0.5);
+	margin:0;
+	padding:0;
+}
+.event__title{
+	margin-top: 10px;
+}
+.event__text{
+	height: 100px;
+	margin:0 0 30px;
+	overflow: hidden;
+}
+.space{
+	width: 100%;
+	height: 100px;
+}
+.event__link{
+	display: block;
+	width: 100%;
+	position: relative;
+}
+.event__link::before{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	top: -10px;
+	left: 0;
+	background-color: #78B2DC;
+}
+/*==============================ClassesPage==========================*/
+/*=================CoursesSection=================*/
+.course__subtitle{
+	text-transform: uppercase;
+	color: #22495C;
+}
+.course__text{
+	margin: 0 0 20px;
+}
+.course__calendar{
+	font-size: 14px;
+}
+.courseDate{
+	border: 1px solid #A0A0A0;
+	border-radius: 10px;
+	padding: 10px;
+	margin:0 0 50px;
+}
+.courseDate span{
+	color:#3A7B9C;
+}
+.courseDate__row{
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+.calendarImg{
+	width: 28px;
+	height: 28px;	
+	position: relative;
+	overflow: hidden;
+	margin: 0 10px 0 0;
+}
+.courseRegButton{
+	width: 100%;
+}
+/*=================CoursesMaterials=================*/
+.courses__title{
+	font-size: 18px;
+	text-transform: uppercase;
+}
+.courses__link{
+	display: block;
+}
+/*==============================ContactsPage==========================*/
+.contacts__title{
+	margin:100px 0 0 0;
+}
+.contacts__link{
+	margin:0 15px 0 0;
+}
+.contacts__linkImg{
+	margin:0 0 0 8px;
+}
+.contacts__address{
+	font-weight: 700;
+}
