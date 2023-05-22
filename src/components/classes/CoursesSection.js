@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import {Container} from 'react-bootstrap';
+import React, {Component, useState} from 'react';
+import {Container,Form, Button, Alert } from 'react-bootstrap';
+import UserAuth from '../UserAuth';
+import UserReg from '../UserReg';
 import courseImg from '../../img/events/event.jpg';
 import calendarImg from '../../img/classes/calendar.png';
 import clockImg from '../../img/classes/clock.png';
-import {Button} from 'react-bootstrap';
+import Axios from 'axios';
 
 const CourseElement = () => {
 	return(
@@ -52,25 +54,56 @@ const CourseDateInfo = () => {
 	);
 };
 
-export default class CoursesSection extends Component {
-	render(){
-		return(
-			<section className="eventsSection section bg-white text-black">
-				<div className="wrapper">
-					<div className="eventsSection__row row">
-						<div className="eventsSection__col col-md-8">
-							<CourseElement/>
-						</div>
-						<div className="eventsSection__col col-md-4">
-							<CourseDateInfo/>
-     						<Button className="courseRegButton" variant="primary" type="submit">
-      								Записаться
-     						</Button>
-						</div>
-						
-					</div>
-				</div>
-			</section>
-		);
+
+
+const CoursesSection = (props) => {
+	const [showAuth, setShowAuth] = useState(false);
+	const [showCourseReg, setShowCourseReg] = useState(false);
+	const [error, setError] = useState("");
+	const [success, setSuccess] = useState(false);
+
+	const handleSubmit = (event)=>{
+   		event.preventDefault();
+
+	    const formData = {
+	      name: props.userData.firstName,
+	      secondName: props.userData.secondName,
+	      mail: props.userData.email
+	    };
+
+	    Axios.post('http://localhost:3001/courseReg', formData)
+	      .then((response) => {
+	        console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
+	        // Дополнительные действия после успешной отправки данных
+	        setSuccess(true);
+	      })
+	      .catch((error) => {
+	        console.log(error);
+	        setError(error.message);
+	      });
 	}
+
+	return(
+		<section className="eventsSection section bg-white text-black">
+			<div className="wrapper">
+				<div className="eventsSection__row row">
+					<div className="eventsSection__col col-md-8">
+						<CourseElement/>
+					</div>
+					<div className="eventsSection__col col-md-4">
+						<CourseDateInfo/>
+						<form onSubmit={handleSubmit}>
+				          {success && <Alert variant="success">Вы записаны на текущий курс!</Alert>}
+				          {error && <Alert variant="danger">Вы не авторизованы!</Alert>}
+ 						<Button className="courseRegButton" variant="primary" type="submit">
+  								Записаться
+ 						</Button>
+ 						</form>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+	);
 }
+export default CoursesSection;

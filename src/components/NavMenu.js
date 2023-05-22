@@ -46,8 +46,10 @@ import {Navbar, Container, Nav, Form, FormControl,Button, Image} from 'react-boo
 // };
 
 const NavMenu = (props) => {
+	var authClickBoolean = false;
 	const handleClick = () => {
-   		props.visible(true);
+		authClickBoolean = !authClickBoolean;
+   		props.visible(authClickBoolean);
   	};
   		return(
   			<Navbar className="navbar bg-opacity-75 fixed-top" collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -78,9 +80,10 @@ const NavMenu = (props) => {
 								</Button>
 							</Form>
 
-							<Button  onClick={handleClick} variant="none" className="searchBtn">
+							{!props.userStatus && <Button  onClick={handleClick} variant="none" className="searchBtn">
 								<Image className="navImg" src={loginImg} alt="Авторизация" width="30" height="30"/>
-							</Button>
+							</Button>}
+							{props.userStatus && <a href="/lk" className="userLogo">{props.userStatus}</a>}
 						</Navbar.Collapse>
 					</div>
 					

@@ -7,17 +7,17 @@ import NewsSection from '../components/home/NewsSection';
 import ParticipantsSection from '../components/home/ParticipantsSection';
 import Footer from '../components/Footer';
 
-export default class HomePage extends Component{
-	render(){
-		return (
-			<div>
-				<Header/>
-				<AboutSection/>
-				<EventsSection/>
-				<NewsSection/>
-				<ParticipantsSection/>
-				<Footer/>
-			</div>
-  		);
-	}
+const HomePage = () => {
+	return (
+		<div>
+			<Header/>
+			<AboutSection/>
+			<EventsSection/>
+			<NewsSection/>
+			<ParticipantsSection/>
+			<Footer/>
+		</div>
+	);
+	
 }
+export default HomePage;

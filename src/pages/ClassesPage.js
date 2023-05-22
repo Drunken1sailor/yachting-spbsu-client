@@ -4,15 +4,14 @@ import CoursesSection from '../components/classes/CoursesSection';
 import CoursesMaterials from '../components/classes/CoursesMaterials';
 import Footer from '../components/Footer';
 
-export default class ClassesPage extends Component{
-	render(){
+const ClassesPage=(props)=>{
   		return(
   			<div>
   				<Header/>
-  				<CoursesSection/>
+  				<CoursesSection userData={props.userData}/>
   				<CoursesMaterials/>
 				<Footer/>
   			</div>
-  		);
-	}
-}
+  		);	
+};
+export default ClassesPage;

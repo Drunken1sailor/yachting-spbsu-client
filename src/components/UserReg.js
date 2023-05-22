@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
-// import { auth } from './firebase-config';
 import Axios from 'axios';
 
-const UserAuth = () => {
+const UserAuth = (props) => {
   const [name, setName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,27 +10,31 @@ const UserAuth = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // try {
-    //   const user = await createUserWithEmailAndPassword(auth, email, password);
-    //   setSuccess(true);
-    // } catch (error) {
-    //   setError(error.message);
-    // }
+    // Axios.post("http://95.163.234.33:3001/register",{
     Axios.post("http://localhost:3001/register",{
       nameReg: name,
       secondNameReg: secondName,
       emailReg: email,
       passwordReg: password }
     ).then((response) => {
-      console.log(response);
-    });
+        console.log(response);
+        setSuccess(true);
+      }).catch((error)=>{
+        console.error("Ошибка при выполнении запроса:", error.message);
+        setError(error.message);
+      });
+  };
+
+  const handleClickAuth = (event) => {
+    event.preventDefault();
+    props.visible(true, false);
   };
 
   return (
-    <div className="userAuth wrapper">
+    <div className="userAuth wrapper userReg">
       <div className="w-50">
         <h2 className="text-uppercase text-center">регистрация</h2>
         <Form onSubmit={handleSubmit}>
@@ -91,6 +93,9 @@ const UserAuth = () => {
           <Button variant="primary" type="submit">
             Зарегистрироваться
           </Button>
+          <a className="text-center mt-2" href="#" onClick={handleClickAuth}>
+            войти
+          </a>
         </Form>
       </div>
     </div>

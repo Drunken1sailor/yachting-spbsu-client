@@ -1,27 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase-config';
+import Axios from 'axios';
+import CheckServerConnection from './CheckServerConnection';
 
 const UserAuth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
   
-  const handleSubmit = async (event) => {
+  Axios.defaults.withCredentials = true;
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      setSuccess(true);
-    } catch (error) {
-      setError(error.message);
-    }
+      // Axios.post("http://95.163.234.33:3001/register",{
+    Axios.post("http://localhost:3001/login",{
+      email: email,
+      password: password }
+    ).then((response) => {
+
+        if(response.data.message){
+          setError(response.data.message);
+        }else{
+         setSuccess(true);
+         window.location.reload();
+        }
+        console.log(response.data);
+      }).catch((error)=>{
+        console.error("Ошибка при выполнении запроса:", error.message);
+        setError(error.message);
+        setSuccess(false);
+      });
   };
+
   const handleClickReg = (event) => {
     event.preventDefault();
     props.visible(false, true);
   };
+
+
 
   return (
     <div className="userAuth wrapper">

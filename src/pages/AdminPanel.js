@@ -38,9 +38,6 @@ const AdminPanel = () => {
 					<div onClick={switchToEvent} className="sidebar-item">
 						Добавить мероприятие
 					</div>
-					<div onClick={switchToClass} className="sidebar-item">
-						Добавить занятие
-					</div>
 			        <Button className="sidebar-logout" onClick={logout} variant="primary" type="button">
 			            Sign Out
 			        </Button>

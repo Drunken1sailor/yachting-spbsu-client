@@ -1,3 +1,13 @@
+/*.testtest{
+	position: absolute;
+	top: 0;
+	left:0;
+	height: 50px;
+	width: 100%;
+	margin:150px 0 0 0;
+	z-index: 10;
+	color:#fff;
+}*/
 .App {
   text-align: center;
 }
@@ -105,6 +115,9 @@ main{
 	display: flex;
 	flex-direction: column;
 }
+.userReg h2{
+	margin: 50px auto 0;
+}
 .userAuth button{
 	width: 200px;
 	margin:0 auto;
@@ -146,6 +159,14 @@ main{
 	transition: transform 0.3s ease 0s;
 }
 .navImg:hover{
+	transform: scale(1.1);
+}
+.userLogo{
+	color:#fff;
+	transition: all 0.2s ease 0s;
+}
+.userLogo:hover{
+	color: #439BDC;
 	transform: scale(1.1);
 }
 /*=================header=================*/
@@ -603,4 +624,24 @@ footer{
 }
 .contacts__address{
 	font-weight: 700;
+}
+/*==============================ContactsPage==========================*/
+.participantLk{
+	padding-top: 80px;
+}
+.avatarImg{
+	width: 200px;
+	height: 200px;
+	position: relative;
+}
+.avatarImg img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border: 3px solid #439BDC;
+	border-radius: 50%;
+	overflow: hidden;
 }
