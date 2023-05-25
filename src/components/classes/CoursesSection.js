@@ -7,7 +7,8 @@ import calendarImg from '../../img/classes/calendar.png';
 import clockImg from '../../img/classes/clock.png';
 import Axios from 'axios';
 
-const CourseElement = () => {
+const CourseElement = (props) => {
+	// console.log(props.course);
 	return(
 		<div className="course event">
 			<div className="event__img mb-2">
@@ -62,25 +63,30 @@ const CoursesSection = (props) => {
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
 
+
 	const handleSubmit = (event)=>{
+		setError("");
+		setSuccess(false);
    		event.preventDefault();
+   		if(props.userData.participantID){
+   			const formData = {
+		      participantID: props.userData.participantID,
+		    };
 
-	    const formData = {
-	      name: props.userData.firstName,
-	      secondName: props.userData.secondName,
-	      mail: props.userData.email
-	    };
-
-	    Axios.post('http://localhost:3001/courseReg', formData)
-	      .then((response) => {
-	        console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
-	        // Дополнительные действия после успешной отправки данных
-	        setSuccess(true);
-	      })
-	      .catch((error) => {
-	        console.log(error);
-	        setError(error.message);
-	      });
+		    Axios.post('http://localhost:3001/courseReg', formData)
+		      .then((response) => {
+		        console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
+		        // Дополнительные действия после успешной отправки данных
+		        setSuccess(true);
+		      })
+		      .catch((error) => {
+		        console.log(error);
+		        setError(error.message);
+		      });
+   		}else{
+   			setError("Вы не авторизованы!");
+   		}
+	    
 	}
 
 	return(

@@ -339,6 +339,10 @@ main{
 .allNews__link:hover{
 	color: #439BDC;
 }
+.newsElement{
+	height: 450px;
+	overflow: hidden;
+}
 /*=================participantsSection=================*/
 .participantsSection{
 	background-color: #161616;
@@ -462,7 +466,13 @@ footer{
 .newsDescriptionInput{
 	height: 100px;
 }
-
+.addNewsCheckbox{
+	display: none;
+}
+/*=================AddOrganizerSection=================*/
+.addOrganizer button{
+	width: 200px;
+}
 
 /*==============================EventsPage==========================*/
 /*=================Header=================*/
@@ -644,4 +654,13 @@ footer{
 	border: 3px solid #439BDC;
 	border-radius: 50%;
 	overflow: hidden;
+}
+/*==============================searchPage==========================*/
+.searchPage{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 8;
 }

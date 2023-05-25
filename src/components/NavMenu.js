@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import logo from '../img/home/header/logo.png';
 import loupeImg from '../img/home/header/loupe.png';
 import loginImg from '../img/user.png'
@@ -46,11 +46,17 @@ import {Navbar, Container, Nav, Form, FormControl,Button, Image} from 'react-boo
 // };
 
 const NavMenu = (props) => {
+  const [search, setSearch] = useState("");
 	var authClickBoolean = false;
 	const handleClick = () => {
 		authClickBoolean = !authClickBoolean;
    		props.visible(authClickBoolean);
   	};
+  	 const handleSubmit = (e) => {
+   	 e.preventDefault();
+   	 props.setIsVisibleSearch(true);
+   	 console.log("search")
+  };
   		return(
   			<Navbar className="navbar bg-opacity-75 fixed-top" collapseOnSelect expand="md" bg="dark" variant="dark">
 
@@ -69,13 +75,14 @@ const NavMenu = (props) => {
 								<Nav.Link href="/events">Мероприятия</Nav.Link>
 								<Nav.Link href="/contacts">Контакты</Nav.Link>
 							</Nav>
-							<Form className="navForm inline">
+							<Form onSubmit={handleSubmit} className="navForm inline">
 								<FormControl 
 									type="text"
 									placeholder="Search"
 									className="mr-sm-5 test"
+									onChange={(event) => props.changeSearchValue(event.target.value)}
 								/>
-								<Button variant="none" className="searchBtn">
+								<Button  type="submit" variant="none" className="searchBtn" onChange={(event) => setSearch(event.target.value)}>
 									<Image className="navImg" src={loupeImg} alt="Поиск" width="30" height="30"/>
 								</Button>
 							</Form>

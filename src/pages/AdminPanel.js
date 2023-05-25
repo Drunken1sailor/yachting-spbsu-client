@@ -5,6 +5,7 @@ import { auth } from '../components/firebase-config';
 import AddNewsSection from '../components/admin/AddNewsSection';
 import AddEventSection from '../components/admin/AddEventSection';
 import AddClassSection from '../components/admin/AddClassSection';
+import AddOrganizerSection from '../components/admin/AddOrganizerSection';
 
 const AdminPanel = () => {
 
@@ -24,6 +25,9 @@ const AdminPanel = () => {
 	const switchToClass = () => {
 		setContent(<AddClassSection/>);
 	}
+	const switchToRegOrg = () => {
+		setContent(<AddOrganizerSection/>);
+	}
 
 
  	return(
@@ -37,6 +41,9 @@ const AdminPanel = () => {
 					</div>
 					<div onClick={switchToEvent} className="sidebar-item">
 						Добавить мероприятие
+					</div>
+					<div onClick={switchToRegOrg} className="sidebar-item">
+						Добавить организатора
 					</div>
 			        <Button className="sidebar-logout" onClick={logout} variant="primary" type="button">
 			            Sign Out

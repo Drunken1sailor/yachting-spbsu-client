@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 
 const AddNewsSection = () => {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [description, setDescription] = useState('');
+  // const [title, setTitle] = useState('');
+  // const [date, setDate] = useState('');
+  // const [description, setDescription] = useState('');
+  const fileInputRef = useRef(null);
+  const titleInputRef = useRef(null);
+  const dateInputRef = useRef(null);
+  const descriptionInputRef = useRef(null);
+  const checkboxInputRef = useRef(null);
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = (event) => {
+    setSuccess(false);
+    setError("");
     event.preventDefault();
 
-    const formData = {
-      title: title,
-      date: date,
-      description: description
-    };
+    const formData = new FormData();
+    formData.append('title', titleInputRef.current.value);
+    formData.append('date', dateInputRef.current.value);
+    formData.append('description', descriptionInputRef.current.value);
+    formData.append('file', fileInputRef.current.files[0]);
+    formData.append('checkbox', checkboxInputRef.current.checked);
 
     Axios.post('http://localhost:3001/news', formData)
       .then((response) => {
@@ -34,8 +43,8 @@ const AddNewsSection = () => {
  	<div className="signIn wrapper">
       <div className="w-50">
         <h2 className="text-uppercase text-center">добавление новости</h2>
-        <Form onSubmit={handleSubmit}>
-          {success && <Alert variant="success">Success</Alert>}
+        <Form enctype="multipart/form-data" onSubmit={handleSubmit}>
+          {success && <Alert variant="success">Новость добавлена!</Alert>}
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group>
             <Form.Label>Заголовок</Form.Label>
@@ -43,8 +52,7 @@ const AddNewsSection = () => {
               type="text"
               placeholder="Заголовок новости"
               required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              ref={titleInputRef}
             />
           </Form.Group>
           <Form.Group>
@@ -53,8 +61,7 @@ const AddNewsSection = () => {
               type="date"
               placeholder="01.01.2001"
               required
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              ref={dateInputRef}
             />
           </Form.Group>
           <Form.Group>
@@ -64,8 +71,7 @@ const AddNewsSection = () => {
               as="textarea"
               placeholder="описание новости"
               required
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              ref={descriptionInputRef}
             />
           </Form.Group>
 
@@ -74,10 +80,11 @@ const AddNewsSection = () => {
 	            <Form.Control
 	              type="file"
 	              required
+                ref={fileInputRef}
 	            />
 	          </Form.Group>
 	           <Form.Group>
-	            <Form.Check className="mb-3" type="checkbox" label="Обозначить как главную новость (заменит текущую главную новость на главной странице)" />
+	            <Form.Check ref={checkboxInputRef} className="mb-3 addNewsCheckbox" type="checkbox" label="Обозначить как главную новость (заменит текущую главную новость на главной странице)" />
 	          </Form.Group>
           <Button variant="primary" type="submit">
             Добавить

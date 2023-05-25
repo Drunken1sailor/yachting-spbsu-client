@@ -12,6 +12,7 @@ import ContactsPage from './pages/ContactsPage';
 import NewsPage from './pages/NewsPage';
 import AdminPage from './pages/AdminPage';
 import LkPage from './pages/LkPage';
+import SearchPage from './pages/SearchPage';
 import OrgLkPage from './pages/OrgLkPage';
 import NavMenu from './components/NavMenu';
 import UserAuth from './components/UserAuth';
@@ -21,7 +22,9 @@ function App() {
   const [isVisibleNav, setIsVisibleNav] = useState(true);
   const [isVisibleAuth, setIsVisibleAuth] = useState(false);
   const [isVisibleReg, setIsVisibleReg] = useState(false);
+  const [isVisibleSearch, setIsVisibleSearch] = useState(false);
   const [userStatus, setUserStatus] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [userData, setUserData] = useState({});
   const visibleNavChange = (value) => {
     setIsVisibleNav(value);
@@ -35,6 +38,12 @@ function App() {
   };
   const changeUserStatus = (value) => {
     setUserStatus(value);
+  }
+  const changeVisibleSearch = (value) => {
+    setIsVisibleSearch(value);
+  }
+  const changeSearchValue = (value) => {
+    setSearchValue(value);
   }
   Axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -52,9 +61,10 @@ function App() {
 
   return (
     <main>
-        {isVisibleNav && <NavMenu  userStatus={userStatus} visible={visibleAuthChange}/>}
+        {isVisibleNav && <NavMenu changeSearchValue={changeSearchValue} setIsVisibleSearch={changeVisibleSearch} userStatus={userStatus} visible={visibleAuthChange}/>}
         {isVisibleAuth && <UserAuth visible={visibleRegChange}/>}
         {isVisibleReg && <UserReg visible={visibleRegChange}/>}
+        {isVisibleSearch && <SearchPage searchValue={searchValue}/>}
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<HomePage/>} />
@@ -64,8 +74,9 @@ function App() {
                 <Route exact path="/contacts" element={<ContactsPage/>} />
                 <Route exact path="/news" element={<NewsPage/>} />
                 <Route exact path="/admin" element={<AdminPage visible={visibleNavChange}/>} />
-                <Route exact path="/lk" element={<LkPage visible={visibleNavChange}/>} />
-                <Route exact path="/orgLk" element={<OrgLkPage visible={visibleNavChange}/>} />
+                <Route exact path="/lk" element={<LkPage userData={userData} visible={visibleNavChange}/>} />
+                <Route exact path="/orgLk" element={<OrgLkPage visible={visibleNavChange}/>} />SearchPage
+                <Route exact path="/search" element={<OrgLkPage visible={SearchPage}/>} />
             </Routes>
         </BrowserRouter>
     </main>
