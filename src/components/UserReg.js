@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
+import ServerIP from './ServerIP.js';
+const url = `http://${ServerIP}:3001/register`;
 
-const UserAuth = (props) => {
+
+const UserReg = (props) => {
   const [name, setName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,16 +15,22 @@ const UserAuth = (props) => {
   const [success, setSuccess] = useState("");
 
   const handleSubmit = (event) => {
+    setError("");
+    setSuccess(false);
     event.preventDefault();
     // Axios.post("http://95.163.234.33:3001/register",{
-    Axios.post("http://localhost:3001/register",{
+    Axios.post(url,{
       nameReg: name,
       secondNameReg: secondName,
       emailReg: email,
       passwordReg: password }
     ).then((response) => {
-        console.log(response);
-        setSuccess(true);
+        if(response.data.message){
+          setError(response.data.message);
+        }else{
+         setSuccess(true);
+         window.location.reload();
+        }
       }).catch((error)=>{
         console.error("Ошибка при выполнении запроса:", error.message);
         setError(error.message);
@@ -38,7 +47,7 @@ const UserAuth = (props) => {
       <div className="w-50">
         <h2 className="text-uppercase text-center">регистрация</h2>
         <Form onSubmit={handleSubmit}>
-          {success && <Alert variant="success">Success</Alert>}
+          {success && <Alert variant="success">Вы зарегистрированы!</Alert>}
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group>
             <Form.Label>Имя</Form.Label>
@@ -102,4 +111,4 @@ const UserAuth = (props) => {
   );
 };
 
-export default UserAuth;
+export default UserReg;

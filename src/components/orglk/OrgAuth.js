@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
+import ServerIP from '../ServerIP.js';
+const url = `http://${ServerIP}:3001/orgLogin`;
 
 const OrgAuth = (props) => {
   const [email, setEmail] = useState("");
@@ -11,9 +13,10 @@ const OrgAuth = (props) => {
   Axios.defaults.withCredentials = true;
 
   const handleSubmit = (event) => {
+    setError("");
+    setSuccess(false);
     event.preventDefault();
-      // Axios.post("http://95.163.234.33:3001/register",{
-    Axios.post("http://localhost:3001/login",{
+    Axios.post(url,{
       email: email,
       password: password }
     ).then((response) => {
@@ -30,11 +33,6 @@ const OrgAuth = (props) => {
         setError(error.message);
         setSuccess(false);
       });
-  };
-
-  const handleClickReg = (event) => {
-    event.preventDefault();
-    props.visible(false, true);
   };
 
 
@@ -69,9 +67,6 @@ const OrgAuth = (props) => {
           <Button variant="primary" type="submit">
             Войти
           </Button>
-          <a className="text-center mt-2" href="#" onClick={handleClickReg}>
-            Зарегистрироваться
-          </a>
         </Form>
       </div>
     </div>

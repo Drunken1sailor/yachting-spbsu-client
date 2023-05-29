@@ -4,8 +4,8 @@ import userImg from '../img/lk/user.png';
 import ServerIP from '../components/ServerIP';
 const url = `http://${ServerIP}:3001/getNews`;
 
-const SearchPage = (props)=>{
- const [news, setNews] = useState([]);
+const AllNewsPage = ()=>{
+const [news, setNews] = useState([]);
 useEffect(() => {
 Axios.get(url)
   .then((response) => {
@@ -16,20 +16,16 @@ Axios.get(url)
   });
 }, []);
 
-const filteredNews = news.filter(newsElement =>{
-	return newsElement.title.toLowerCase().includes(props.searchValue.toLowerCase())
-});
-
 
 	return(
 		<section className="searchPage bg-white text-black">
 			<div className="wrapper participantLk">
 				<h3 className="section__title">
-					<p>Результаты поиска</p>
+					<p>Новости</p>
 				</h3>
 		     	<div className="newsSection__row row scrollableContainer overflow-auto">
 
-				{filteredNews.map((newsElement) => (
+				{news.map((newsElement) => (
 				          	
 					<div key={newsElement.newsId} className="newsElement col-md-3">
 						{(() => {
@@ -60,4 +56,4 @@ const filteredNews = news.filter(newsElement =>{
 		</section>
 	);
 }
-export default SearchPage;
+export default AllNewsPage;

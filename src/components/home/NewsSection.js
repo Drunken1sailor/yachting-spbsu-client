@@ -2,37 +2,15 @@ import React, {useEffect,useState} from 'react';
 import Axios from 'axios';
 import {Container} from 'react-bootstrap';
 import newsImg from '../../img/home/news/newsImg.jpg';
-import newsImg1 from '../../img/home/news/1.png';
-import newsImg2 from '../../img/home/news/2.png';
-import newsImg3 from '../../img/home/news/3.png';
-//import newsImg4 from '../../img/home/news/';
-import newsImg5 from '../../img/home/news/5.jpg';
+import ServerIP from '../ServerIP';
+const url = `http://${ServerIP}:3001/getNews`;
 
 
-
-const NewsElement = () => {
-	return(
-		<div>
-			<div>
-				<img className="img-fluid" src={newsImg5} draggable="false"/>
-			</div>
-			<div className="news__title">
-				заголовок новости
-			</div>
-			<div className="news__date">
-				01.01.2023
-			</div>
-			<div className="news__text">
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio facere laboriosam maxime amet velit nam quia voluptatem labore architecto, vero, ad reprehenderit, repellat nobis magnam laudantium eveniet, iure aliquam illo.
-			</div>
-		</div>
-	);
-};
 
 const NewsSection = () => {
  	const [news, setNews] = useState([]);
 	useEffect(() => {
-	    Axios.get('http://localhost:3001/getNews')
+	    Axios.get(url)
 	      .then((response) => {
 	        setNews(response.data);
 	      })
@@ -52,15 +30,15 @@ const NewsSection = () => {
 				          	
 							<div key={newsElement.newsId} className="newsElement col-md-3">
 								{(() => {
-
+									let newsURL = `/news?newsID=${newsElement.newsId}`;
 								    let imgPath = newsElement.img;
 								    imgPath = "http://localhost:3001" + imgPath.replace('./src', '');
 								    let cleanDate = newsElement.date.replace("T21:00:00.000Z","");
 								return(
 								<div>
-									<div>
+									<a className="newsImg" href={newsURL}>
 										<img className="img-fluid" src={imgPath} draggable="false"/>
-									</div>
+									</a>
 									<div className="news__title">
 										{newsElement.title}
 									</div>
@@ -74,7 +52,7 @@ const NewsSection = () => {
 								})()}
 							</div>
 				        ))}
-				        <a className="allNews__link" href="/news">все новости →</a>
+				        <a className="allNews__link" href="/allNews">все новости →</a>
 			        	</div>
 				      
 				    </div>

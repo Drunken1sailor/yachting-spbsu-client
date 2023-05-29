@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
+import ServerIP from '../ServerIP';
+const url = `http://${ServerIP}:3001/orgReg`;
 
 const AddOrganizerSection = () => {
   const [error, setError] = useState("");
@@ -12,6 +14,8 @@ const AddOrganizerSection = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const handleSubmit = (event) => {
+    setError("");
+    setSuccess(false);
     event.preventDefault();
 
     const formData = {
@@ -21,7 +25,7 @@ const AddOrganizerSection = () => {
       passwordReg: password
     };
 
-    Axios.post('http://localhost:3001/orgReg', formData)
+    Axios.post(url, formData)
       .then((response) => {
         console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
         // Дополнительные действия после успешной отправки данных

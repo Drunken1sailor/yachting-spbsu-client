@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
+import ServerIP from '../ServerIP';
+const url = `http://${ServerIP}:3001/event`;
 
 const AddEventSection = () => {
   const [title, setTitle] = useState('');
@@ -18,7 +20,7 @@ const AddEventSection = () => {
       description: description
     };
 
-    Axios.post('http://localhost:3001/event', formData)
+    Axios.post(url, formData)
       .then((response) => {
         console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
         // Дополнительные действия после успешной отправки данных

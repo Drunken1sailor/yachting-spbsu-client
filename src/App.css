@@ -302,6 +302,12 @@ main{
 	object-fit: cover;
 }
 /*=================newsSection=================*/
+.newsImg{
+	transition: all 0.3s ease 0s; 
+}
+.newsImg:hover{
+	transform: scale(1.1);
+}
 .newsSection{
 	width: 100%;
 	position: relative;

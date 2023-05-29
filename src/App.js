@@ -6,9 +6,9 @@ import './App.css';
 import { BrowserRouter, Router, Routes, Route, Link, useLocation  } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ClassesPage from './pages/ClassesPage';
-import MembershipPage from './pages/MembershipPage';
 import EventsPage from './pages/EventsPage';
 import ContactsPage from './pages/ContactsPage';
+import AllNewsPage from './pages/AllNewsPage';
 import NewsPage from './pages/NewsPage';
 import AdminPage from './pages/AdminPage';
 import LkPage from './pages/LkPage';
@@ -17,6 +17,8 @@ import OrgLkPage from './pages/OrgLkPage';
 import NavMenu from './components/NavMenu';
 import UserAuth from './components/UserAuth';
 import UserReg from './components/UserReg';
+import ServerIP from './components/ServerIP';
+const url = `http://${ServerIP}:3001/login`;
 
 function App() {
   const [isVisibleNav, setIsVisibleNav] = useState(true);
@@ -47,7 +49,7 @@ function App() {
   }
   Axios.defaults.withCredentials = true;
   useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response)=>{
+    Axios.get(url).then((response)=>{
       if(response.data.loggedIn == true){
         let name = response.data.user[0].secondName + " " + response.data.user[0].firstName;
         setUserData(response.data.user[0]);
@@ -55,7 +57,7 @@ function App() {
         setIsVisibleAuth(false);
         setIsVisibleReg(false);
       }
-      console.log(response);
+      // console.log(response);
     })
   }, []);
 
@@ -68,15 +70,15 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route exact path="/" element={<HomePage/>} />
-                <Route exact path="/membership" element={<MembershipPage/>} />
                 <Route exact path="/classes" element={<ClassesPage userData={userData} userStatus={userStatus}/>} />
                 <Route exact path="/events" element={<EventsPage/>} />
                 <Route exact path="/contacts" element={<ContactsPage/>} />
+                <Route exact path="/allNews" element={<AllNewsPage/>} />
                 <Route exact path="/news" element={<NewsPage/>} />
                 <Route exact path="/admin" element={<AdminPage visible={visibleNavChange}/>} />
                 <Route exact path="/lk" element={<LkPage userData={userData} visible={visibleNavChange}/>} />
-                <Route exact path="/orgLk" element={<OrgLkPage visible={visibleNavChange}/>} />SearchPage
-                <Route exact path="/search" element={<OrgLkPage visible={SearchPage}/>} />
+                <Route exact path="/orgLk" element={<OrgLkPage userData={userData}/>} />SearchPage
+                <Route exact path="/search" element={<SearchPage visible={SearchPage}/>} />
             </Routes>
         </BrowserRouter>
     </main>

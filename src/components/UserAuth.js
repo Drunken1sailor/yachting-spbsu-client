@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 import CheckServerConnection from './CheckServerConnection';
+import ServerIP from './ServerIP.js';
+const url = `http://${ServerIP}:3001/login`;
 
 const UserAuth = (props) => {
   const [email, setEmail] = useState("");
@@ -12,9 +14,11 @@ const UserAuth = (props) => {
   Axios.defaults.withCredentials = true;
 
   const handleSubmit = (event) => {
+    setError("");
+    setSuccess(false);
     event.preventDefault();
       // Axios.post("http://95.163.234.33:3001/register",{
-    Axios.post("http://localhost:3001/login",{
+    Axios.post(url,{
       email: email,
       password: password }
     ).then((response) => {
