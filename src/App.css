@@ -302,11 +302,16 @@ main{
 	object-fit: cover;
 }
 /*=================newsSection=================*/
+
 .newsImg{
+	display: block;
+	border-radius: 10px;
+	overflow: hidden;
+	margin:0 0 10px;
 	transition: all 0.3s ease 0s; 
 }
 .newsImg:hover{
-	transform: scale(1.1);
+	transform: scale(1.01);
 }
 .newsSection{
 	width: 100%;
@@ -346,8 +351,11 @@ main{
 	color: #439BDC;
 }
 .newsElement{
-	height: 450px;
+	max-height: 450px;
 	overflow: hidden;
+	/*border:1px solid pink;*/
+	/*padding: 0;*/
+	/*box-shadow: inset 0px -20px 30px -20px rgba(0, 0, 0, 0.5);*/
 }
 /*=================participantsSection=================*/
 .participantsSection{
@@ -528,16 +536,38 @@ footer{
 .eventsSection__row{
 	height:auto;
 }
+.eventsSection__row>:nth-child(2){
+	margin-top: 150px;
+}
 .eventsSection__col{
 	padding: 0 30px;
 }
 .event{
-	margin:0 0 100px;
+	margin:0 0 60px;
+	max-height: 600px;
+	padding: 0 40px;
 }
+
 .event__img{
 	display: block;
+	width: 500px;
+	height: 300px;
 	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+	transition: all 0.3s ease 0;
+}
+.event__img img{
+	position: absolute;
+	top: 0;
+	left:0;
 	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.event__img:hover{
+	transform: scale(1.03);
 }
 .event__img__title{
 	position: absolute;
@@ -567,7 +597,7 @@ footer{
 	overflow: hidden;
 }
 .space{
-	width: 100%;
+	/*width: 100%;*/
 	height: 100px;
 }
 .event__link{
@@ -669,4 +699,26 @@ footer{
 	width: 100%;
 	height: 100vh;
 	z-index: 8;
+}
+/*==============================NewsPage==========================*/
+.newsElement__img{
+	width: 500px;
+	height: 300px;
+	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.newsElement__img img{
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.newsElement__body{
+	font-size: 18px;
+	margin:0 0 100px;
+	text-align: justify;
+	line-height: 40px;
 }

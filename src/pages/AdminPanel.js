@@ -4,8 +4,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../components/firebase-config';
 import AddNewsSection from '../components/admin/AddNewsSection';
 import AddEventSection from '../components/admin/AddEventSection';
-import AddClassSection from '../components/admin/AddClassSection';
 import AddOrganizerSection from '../components/admin/AddOrganizerSection';
+import AddCourseSection from '../components/admin/AddCourseSection';
 
 const AdminPanel = () => {
 
@@ -22,11 +22,11 @@ const AdminPanel = () => {
 	const switchToEvent = () => {
 		setContent(<AddEventSection/>);
 	}
-	const switchToClass = () => {
-		setContent(<AddClassSection/>);
-	}
 	const switchToRegOrg = () => {
 		setContent(<AddOrganizerSection/>);
+	}
+	const switchToCourse = () => {
+		setContent(<AddCourseSection/>);
 	}
 
 
@@ -41,6 +41,9 @@ const AdminPanel = () => {
 					</div>
 					<div onClick={switchToEvent} className="sidebar-item">
 						Добавить мероприятие
+					</div>
+					<div onClick={switchToCourse} className="sidebar-item">
+						Изменить курс
 					</div>
 					<div onClick={switchToRegOrg} className="sidebar-item">
 						Добавить организатора

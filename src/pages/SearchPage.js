@@ -17,7 +17,7 @@ Axios.get(url)
 }, []);
 
 const filteredNews = news.filter(newsElement =>{
-	return newsElement.title.toLowerCase().includes(props.searchValue.toLowerCase())
+	return newsElement.body.toLowerCase().includes(props.searchValue.toLowerCase())
 });
 
 
@@ -33,15 +33,15 @@ const filteredNews = news.filter(newsElement =>{
 				          	
 					<div key={newsElement.newsId} className="newsElement col-md-3">
 						{(() => {
-
+							let newsURL = `/news?newsID=${newsElement.newsId}`;
 						    let imgPath = newsElement.img;
 						    imgPath = "http://localhost:3001" + imgPath.replace('./src', '');
 						    let cleanDate = newsElement.date.replace("T21:00:00.000Z","");
 						return(
 						<div>
-							<div>
+							<a className="newsImg" href={newsURL}>
 								<img className="img-fluid" src={imgPath} draggable="false"/>
-							</div>
+							</a>
 							<div className="news__title">
 								{newsElement.title}
 							</div>

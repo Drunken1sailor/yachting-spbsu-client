@@ -1,9 +1,9 @@
 import React, {Component,useEffect, useState} from 'react';
-import { Button,Alert } from 'react-bootstrap';
+import { Button,Alert,Table } from 'react-bootstrap';
 import Axios from 'axios';
 import userImg from '../img/lk/user.png';
-import ServerIP from '../components/ServerIP.js';
-const url = `http://${ServerIP}:3001/lk`;
+import ServerIP from '../components/ServerIP';
+const getCoursesUrl = `http://${ServerIP}:3001/getCourses`;
 const urlLogout = `http://${ServerIP}:3001/logout`;
 
 const LkPage = (props)=>{
@@ -11,17 +11,17 @@ const LkPage = (props)=>{
 	const [courseData, setCourseData] = useState([]);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
+	let courseDate = "";
 
 	useEffect(() => {
-	Axios.post(url, {participantID: props.userData.participantID}, { headers: { 'Content-Type': 'application/json' } })
-      .then((response) => {
-        console.log(response.data);
-        setCourseData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      }, []);
+		Axios.post(getCoursesUrl, {participantID: props.userData.participantID})
+	      .then((response) => {
+	      	setCourseData(response.data);
+	      })
+	      .catch((error) => {
+	        console.log(error);
+	      });
+	}, []);
 
 	const handleClickExit = (event) => {
 	    setError("");
@@ -53,13 +53,34 @@ const LkPage = (props)=>{
 						<Button variant="primary" onClick={handleClickExit}>ВЫЙТИ</Button>
 					</div>
 					<div className="col-md-8">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur tempora reprehenderit, illo! Beatae rerum velit obcaecati quibusdam ullam sed similique vel nostrum, necessitatibus itaque quos hic quam pariatur. Similique, dolore?
 						<div>
-							<div className="course__subtitle">
+							<div className="mb-3 course__subtitle">
 								Курсы:
 							</div>
 							<div>
-								
+								<Table striped bordered hover>
+							      <thead>
+							        <tr>
+							          <th>#</th>
+							          <th>Название курса</th>
+							          <th>Дата проведения</th>
+							          {/* Другие заголовки столбцов */}
+							        </tr>
+							      </thead>
+							      <tbody>
+							        {courseData.length>0 && (courseData.map((course, index) => (
+
+							          <tr key={course.id}>
+							          {(() => {
+							          	courseDate = course.date.replace("T21:00:00.000Z","")+" "+course.beginTime;
+							          })()}
+							            <td>{index + 1}</td>
+							            <td>{course.title}</td>
+							            <td>{courseDate}</td>
+							          </tr>
+							        )))}
+							      </tbody>
+							    </Table>
 							</div>
 						</div>	
 					</div>

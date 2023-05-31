@@ -10,6 +10,7 @@ import EventsPage from './pages/EventsPage';
 import ContactsPage from './pages/ContactsPage';
 import AllNewsPage from './pages/AllNewsPage';
 import NewsPage from './pages/NewsPage';
+import EventPage from './pages/EventPage';
 import AdminPage from './pages/AdminPage';
 import LkPage from './pages/LkPage';
 import SearchPage from './pages/SearchPage';
@@ -26,7 +27,7 @@ function App() {
   const [isVisibleReg, setIsVisibleReg] = useState(false);
   const [isVisibleSearch, setIsVisibleSearch] = useState(false);
   const [userStatus, setUserStatus] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(false);
   const [userData, setUserData] = useState({});
   const visibleNavChange = (value) => {
     setIsVisibleNav(value);
@@ -63,13 +64,13 @@ function App() {
 
   return (
     <main>
-        {isVisibleNav && <NavMenu changeSearchValue={changeSearchValue} setIsVisibleSearch={changeVisibleSearch} userStatus={userStatus} visible={visibleAuthChange}/>}
+        {isVisibleNav && <NavMenu userData={userData} changeSearchValue={changeSearchValue} setIsVisibleSearch={changeVisibleSearch} userName={userStatus} visible={visibleAuthChange}/>}
         {isVisibleAuth && <UserAuth visible={visibleRegChange}/>}
         {isVisibleReg && <UserReg visible={visibleRegChange}/>}
         {isVisibleSearch && <SearchPage searchValue={searchValue}/>}
         <BrowserRouter>
             <Routes>
-                <Route exact path="/" element={<HomePage/>} />
+                <Route exact path="/" element={<HomePage searchValue={searchValue}/>} />
                 <Route exact path="/classes" element={<ClassesPage userData={userData} userStatus={userStatus}/>} />
                 <Route exact path="/events" element={<EventsPage/>} />
                 <Route exact path="/contacts" element={<ContactsPage/>} />
@@ -77,8 +78,9 @@ function App() {
                 <Route exact path="/news" element={<NewsPage/>} />
                 <Route exact path="/admin" element={<AdminPage visible={visibleNavChange}/>} />
                 <Route exact path="/lk" element={<LkPage userData={userData} visible={visibleNavChange}/>} />
-                <Route exact path="/orgLk" element={<OrgLkPage userData={userData}/>} />SearchPage
+                <Route exact path="/orgLk" element={<OrgLkPage userData={userData}/>} />
                 <Route exact path="/search" element={<SearchPage visible={SearchPage}/>} />
+                <Route exact path="/event" element={<EventPage/>} />
             </Routes>
         </BrowserRouter>
     </main>

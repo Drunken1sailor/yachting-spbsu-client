@@ -49,7 +49,7 @@ const UserAuth = (props) => {
       <div className="w-50">
         <h2 className="text-uppercase text-center">войти</h2>
         <Form onSubmit={handleSubmit}>
-          {success && <Alert variant="success">Success</Alert>}
+          {success && <Alert variant="success">Добро пожаловать!</Alert>}
           {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>

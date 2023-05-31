@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container,Form, Button, Alert } from 'react-bootstrap';
 import UserAuth from '../UserAuth';
 import UserReg from '../UserReg';
@@ -6,51 +6,81 @@ import courseImg from '../../img/events/event.jpg';
 import calendarImg from '../../img/classes/calendar.png';
 import clockImg from '../../img/classes/clock.png';
 import Axios from 'axios';
+import ServerIP from '../ServerIP';
+const getCourseUrl = `http://${ServerIP}:3001/getCourse`;
+const regOnCourseUrl = `http://${ServerIP}:3001/regOnCourse`;
 
 const CourseElement = (props) => {
-	// console.log(props.course);
+	const [course, setCourse] = useState([]);
+	useEffect(() => {
+	    Axios.get(getCourseUrl)
+	      .then((response) => {
+	        setCourse(response.data);
+	      })
+	      .catch((error) => {
+	        console.log(error);
+	      });
+	}, []);
 	return(
 		<div className="course event">
-			<div className="event__img mb-2">
-				<img className="img-fluid" src={courseImg} draggable="false"/>
-				<div className="event__img__title">
-					курс по яхтингу и парусному спорту
+		{course.map((courseElement) => (
+			<div>
+				<div className="event__img mb-2">
+					<img className="img-fluid" src={courseImg} draggable="false"/>
+					<div className="event__img__title">
+						{courseElement.title}
+					</div>
 				</div>
-			</div>
-			<div className="course__subtitle">
-				анонс:
-			</div>
-			<div className="course__text news__text">
-			Курс на права ГИМС с 27 марта 2023 года 19:30-21:30 по пн. и ср. плюс практика. Полезен начинающим и опытным яхтсменам, желающим улучшить свой результат, потому что содержит современные учебные материалы пока не описанные в литературе.
-			</div>
+			
+				<div className="course__subtitle">
+					анонс:
+				</div>
+				<div className="course__text news__text">
+					{courseElement.anons}
+				</div>
 
-			<div className="course__subtitle">
-				о мероприятии:
+				<div className="course__subtitle">
+					о мероприятии:
+				</div>
+				<a className="course__calendar" target="_blank" href="https://calendar.google.com/calendar/embed?src=cpsspbryc%40gmail.com&ctz=Europe%2FMoscow">https://calendar.google.com/calendar/embed?src=cpsspbryc%40gmail.com&ctz=Europe%2FMoscow</a>
 			</div>
-			<a className="course__calendar" target="_blank" href="https://calendar.google.com/calendar/embed?src=cpsspbryc%40gmail.com&ctz=Europe%2FMoscow">https://calendar.google.com/calendar/embed?src=cpsspbryc%40gmail.com&ctz=Europe%2FMoscow</a>
-
+		))}
 		</div>
 	);
 };
 
 const CourseDateInfo = () => {
+	const [course, setCourse] = useState([]);
+	useEffect(() => {
+	    Axios.get(getCourseUrl)
+	      .then((response) => {
+	        setCourse(response.data);
+	      })
+	      .catch((error) => {
+	        console.log(error);
+	      });
+	}, []);
 	return(
 		<div className="courseDate">
-			<div className="course__subtitle">
-				дата и время:
-			</div>
-			<div className="courseDate__row">
-				<div className="calendarImg">
-					<img className="img-fluid" src={calendarImg} alt="calendar"/>
+			{course.map((courseElement) => (
+			<div>
+				<div className="course__subtitle">
+					дата и время:
 				</div>
-				<div className=""><span>03 мая 2023 19:30</span> (UTC+03:00)</div>
-			</div>
-			<div className="courseDate__row">
-				<div className="calendarImg">
-					<img className="img-fluid" src={clockImg} alt="calendar"/>
+				<div className="courseDate__row">
+					<div className="calendarImg">
+						<img className="img-fluid" src={calendarImg} alt="calendar"/>
+					</div>
+					<div className=""><span>{courseElement.date.replace("T21:00:00.000Z","")} {courseElement.beginTime}</span> (UTC+03:00)</div>
 				</div>
-				<div className="">Продолжительность: <span>02:00</span></div>
+				<div className="courseDate__row">
+					<div className="calendarImg">
+						<img className="img-fluid" src={clockImg} alt="calendar"/>
+					</div>
+					<div className="">Продолжительность: <span>{courseElement.duration}</span></div>
+				</div>
 			</div>
+			))}
 		</div>
 	);
 };
@@ -68,16 +98,17 @@ const CoursesSection = (props) => {
 		setError("");
 		setSuccess(false);
    		event.preventDefault();
-   		if(props.userData.participantID){
-   			const formData = {
-		      participantID: props.userData.participantID,
-		    };
 
-		    Axios.post('http://localhost:3001/courseReg', formData)
+   		if(props.userData.participantID){
+		    Axios.post(
+		    	regOnCourseUrl,
+		    	{participantID: props.userData.participantID})
 		      .then((response) => {
-		        console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
-		        // Дополнительные действия после успешной отправки данных
-		        setSuccess(true);
+		        if(response.data.message){
+		          setError(response.data.message);
+		        }else{
+		         setSuccess(true);
+		        }
 		      })
 		      .catch((error) => {
 		        console.log(error);
@@ -85,8 +116,7 @@ const CoursesSection = (props) => {
 		      });
    		}else{
    			setError("Вы не авторизованы!");
-   		}
-	    
+   		}   
 	}
 
 	return(
@@ -100,7 +130,7 @@ const CoursesSection = (props) => {
 						<CourseDateInfo/>
 						<form onSubmit={handleSubmit}>
 				          {success && <Alert variant="success">Вы записаны на текущий курс!</Alert>}
-				          {error && <Alert variant="danger">Вы не авторизованы!</Alert>}
+				          {error && <Alert variant="danger">{error}</Alert>}
  						<Button className="courseRegButton" variant="primary" type="submit">
   								Записаться
  						</Button>

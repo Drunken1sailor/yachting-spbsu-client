@@ -23,7 +23,7 @@ const OrgLkPage = (props)=>{
 
 	let page;
 	if (authStatus) {
-		page = <OrgLK/>;
+		page = <OrgLK userData={props.userData}/>;
 	} else {
 		page = <OrgAuth/>;
 	}

@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 import ServerIP from '../ServerIP';
 const url = `http://${ServerIP}:3001/event`;
 
 const AddEventSection = () => {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
-  const [description, setDescription] = useState('');
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const fileInputRef = useRef(null);
+  const titleInputRef = useRef(null);
+  const dateInputRef = useRef(null);
+  const descriptionInputRef = useRef(null);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const formData = {
-      title: title,
-      date: date,
-      description: description
-    };
+    const formData = new FormData();
+    formData.append('title', titleInputRef.current.value);
+    formData.append('date', dateInputRef.current.value);
+    formData.append('description', descriptionInputRef.current.value);
+    formData.append('file', fileInputRef.current.files[0]);
 
     Axios.post(url, formData)
       .then((response) => {
@@ -45,8 +47,7 @@ const AddEventSection = () => {
               type="text"
               placeholder="заголовок меропрятия"
               required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              ref={titleInputRef}
             />
           </Form.Group>
           <Form.Group>
@@ -55,8 +56,7 @@ const AddEventSection = () => {
               type="date"
               placeholder="01.01.2001"
               required
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              ref={dateInputRef}
             />
           </Form.Group>
           <Form.Group>
@@ -66,8 +66,7 @@ const AddEventSection = () => {
               as="textarea"
               placeholder="описание мероприятия"
               required
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              ref={descriptionInputRef}
             />
           </Form.Group>
           
@@ -76,6 +75,7 @@ const AddEventSection = () => {
 	            <Form.Control
 	              type="file"
 	              required
+                ref={fileInputRef}
 	            />
 	          </Form.Group>
           <Button variant="primary" type="submit">

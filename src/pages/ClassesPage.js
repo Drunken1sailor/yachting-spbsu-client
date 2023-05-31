@@ -4,24 +4,12 @@ import Header from '../components/classes/Header';
 import CoursesSection from '../components/classes/CoursesSection';
 import CoursesMaterials from '../components/classes/CoursesMaterials';
 import Footer from '../components/Footer';
-import ServerIP from '../components/ServerIP';
-const url = `http://${ServerIP}:3001/getCourse`;
 
 const ClassesPage=(props)=>{
- 	const [course, setCourse] = useState([]);
-	useEffect(() => {
-	    Axios.get(url)
-	      .then((response) => {
-	        setCourse(response.data);
-	      })
-	      .catch((error) => {
-	        console.log(error);
-	      });
-	}, []);
 	return(
 		<div>
 			<Header/>
-			<CoursesSection course={course} userData={props.userData}/>
+			<CoursesSection userData={props.userData}/>
 			<CoursesMaterials/>
 			<Footer/>
 		</div>

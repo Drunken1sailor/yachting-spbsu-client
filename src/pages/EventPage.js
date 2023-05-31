@@ -2,22 +2,21 @@ import React, {Component,useState,useEffect} from 'react';
 import Axios from 'axios';
 import userImg from '../img/lk/user.png';
 import ServerIP from '../components/ServerIP';
-const url = `http://${ServerIP}:3001/getNews`;
+const url = `http://${ServerIP}:3001/getEvents`;
 const imgLink = `http://${ServerIP}:3001`;
 
-const NewsPage = ()=>{
+const EventPage = ()=>{
 
-	const [news, setNews] = useState([]);
-	const [newsItem, setNewsItem] = useState({});
+	const [events, setEvents] = useState([]);
 	const urlParams = new URLSearchParams(window.location.search);
-	const newsID = urlParams.get('newsID');
+	const eventID = urlParams.get('eventID');
 	let imgPath="";
 	let cleanDate="";
 	useEffect(() => {
 
-		Axios.get(url,{newsID: newsID})
+		Axios.get(url)
 		  .then((response) => {
-		    setNews(response.data);
+		    setEvents(response.data);
 		  })
 		  .catch((error) => {
 		    console.log(error);
@@ -26,34 +25,34 @@ const NewsPage = ()=>{
 		// setNewsItem(news.find((item) => item.newsID === newsID));
 		
 	}, []);
-	const filteredNews = news.filter(newsElement =>{
-		return newsElement.newsId.toString() === newsID;
+	const filteredNews = events.filter(event =>{
+		return event.eventID.toString() === eventID;
 	});
 
 	return(
 		<section className="bg-white text-black">
 			<div className="wrapper participantLk">
-				{(filteredNews.map((newsElement) => (
+				{(filteredNews.map((event) => (
 
-					<div key = {newsElement.newsId}>
+					<div key = {event.eventID}>
 						{(() => {
-							imgPath = imgLink + newsElement.img.replace('./src', '');
-							cleanDate = newsElement.date.replace("T21:00:00.000Z","");
+							imgPath = imgLink + event.img.replace('./src', '');
+							cleanDate = event.date.replace("T21:00:00.000Z","");
 						})()}
 						<h3 className="mt-5 section__title">
-						{newsElement.title}
+						{event.title}
 						</h3>
 						<div className="mb-5">
 							{cleanDate}
 						</div>
-						<div className="newsElement__img mb-5">
+						<div className="event__img mb-5">
 							<img src={imgPath} alt="новость"/>
 						</div>
-						<div className="newsElement__body">{newsElement.body}</div>
+						<div className="newsElement__body">{event.body}</div>
 					</div>
 				)))}
 			</div>
 		</section>
 	);
 }
-export default NewsPage;
+export default EventPage;

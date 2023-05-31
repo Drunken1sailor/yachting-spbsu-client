@@ -7,15 +7,19 @@ import NewsSection from '../components/home/NewsSection';
 import ParticipantsSection from '../components/home/ParticipantsSection';
 import Footer from '../components/Footer';
 
-const HomePage = () => {
+const HomePage = (props) => {
 	return (
 		<div>
-			<Header/>
-			<AboutSection/>
-			<EventsSection/>
-			<NewsSection/>
-			<ParticipantsSection/>
-			<Footer/>
+		{!props.searchValue && 
+			<div>
+				<Header/>
+				<AboutSection/>
+				<EventsSection/>
+				<NewsSection/>
+				<ParticipantsSection/>
+				<Footer/>
+			</div>
+		}
 		</div>
 	);
 	
