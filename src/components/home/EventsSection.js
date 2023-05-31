@@ -51,7 +51,7 @@ const EventsSection = () => {
 				</h3>
 				<div className="eventsSection__row row">
 				{numberOfEvents<7 && events.length>0 && (events.map((event) => (
-					<div className="event col-md-6">
+					<div className="event col-sm-12 col-md-6">
 						{(() => {
 							eventURL = `/event?eventID=${event.eventID}`;
 							imgPath = imgLink + event.img.replace('./src', '');

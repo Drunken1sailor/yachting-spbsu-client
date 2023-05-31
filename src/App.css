@@ -100,9 +100,7 @@ main{
 	background-color: rgba(0,0,0,0.5);
 }
 .userAuth{
-	position: fixed;
 	z-index: 9;
-	height: 100vh;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -115,15 +113,42 @@ main{
 	display: flex;
 	flex-direction: column;
 }
-.userReg h2{
-	margin: 50px auto 0;
-}
 .userAuth button{
 	width: 200px;
 	margin:0 auto;
 }
 .userAuth input{
 	margin-bottom: 15px;
+}
+.userAuth h2{
+	margin: 100px auto 0;
+}
+.userReg{
+	z-index: 9;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(255,255,255,1);
+}
+.userReg form{
+	width: 500px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+.userReg h2{
+	margin: 100px auto 0;
+}
+.userReg button{
+	width: 200px;
+	margin:0 auto;
+}
+.changeFormLink{
+	margin:0 0 50px;
+}
+.recaptcha{
+	margin:0 auto;
 }
 /*==============================HomePage==========================*/
 
@@ -304,11 +329,22 @@ main{
 /*=================newsSection=================*/
 
 .newsImg{
+	width: 100%;
+	height: 180px;
 	display: block;
+	position: relative;
 	border-radius: 10px;
 	overflow: hidden;
 	margin:0 0 10px;
 	transition: all 0.3s ease 0s; 
+}
+.newsImg img{
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 .newsImg:hover{
 	transform: scale(1.01);
@@ -353,6 +389,7 @@ main{
 .newsElement{
 	max-height: 450px;
 	overflow: hidden;
+	margin-bottom: 20px;
 	/*border:1px solid pink;*/
 	/*padding: 0;*/
 	/*box-shadow: inset 0px -20px 30px -20px rgba(0, 0, 0, 0.5);*/
@@ -550,7 +587,7 @@ footer{
 
 .event__img{
 	display: block;
-	width: 500px;
+	width: 100%;
 	height: 300px;
 	position: relative;
 	border-radius: 10px;
@@ -671,6 +708,9 @@ footer{
 .contacts__address{
 	font-weight: 700;
 }
+.lastContactsText{
+	margin: 0 0 100px;
+}
 /*==============================ContactsPage==========================*/
 .participantLk{
 	padding-top: 80px;
@@ -690,6 +730,9 @@ footer{
 	border: 3px solid #439BDC;
 	border-radius: 50%;
 	overflow: hidden;
+}
+.logoutBtn{
+	margin:0 0 30px;
 }
 /*==============================searchPage==========================*/
 .searchPage{
@@ -721,4 +764,203 @@ footer{
 	margin:0 0 100px;
 	text-align: justify;
 	line-height: 40px;
+}
+/*============media============*/
+@media(max-width: 1200px){
+	.event__img{
+		height: 250px;
+	}
+}
+@media(max-width: 990px){
+	.navForm{
+		display: flex;
+		align-items: center;
+		width: 200px;
+		height: 50px;
+	}
+	.navForm input{
+		width: 150px;
+		height: 40px;
+		margin: 0 0 0 5px;
+	}
+	.searchBtn img{
+		width: 25px;
+		height: 25px;
+	}
+}
+@media(max-width: 950px){
+	.event__img{
+		height: 200px;
+	}
+	.regularText{
+		font-size: 14px;
+	}
+	h3{
+		font-size: 20px;
+	}
+	.news__title{
+		font-size: 16px;
+	}
+	.news__date{
+		font-size: 12px;
+	}
+	.news__text{
+		font-size: 14px;
+	}
+	.allNews__link{
+		font-size: 16px;
+	}
+	.eventsSection__row>:nth-child(2){
+		margin-top: 80px;
+	}
+	.newsSection__row{
+		height:300px;
+	}
+	.event{
+		margin:0 0 20px;
+		max-height: 600px;
+		padding: 0 30px;
+	}
+	.footer p{
+		font-size: 	10px;
+	}
+	.universities__img{
+		width: 180px;
+		height: 180px;
+	}
+
+	.header{
+		height: 600px;
+	}
+	.userAuth form{
+		width: 80%;
+		overflow: hidden;
+	}
+	.userAuth input{
+		width: 100%;
+	}
+	.userReg form{
+		width: 80%;
+		overflow: hidden;
+	}
+	.userReg input{
+		width: 100%;
+	}
+	.recaptcha{
+		width: 100%;
+	}
+}
+@media(max-width: 850px){
+	.header__title{
+		width: 600px;
+	}
+	.title__text{
+		font-size: 24px;
+	}
+	.subtitle{
+		font-size: 20px;
+	}
+}
+@media(max-width: 767px){
+	.event{
+		width: 80%;
+		margin: 0 auto;
+	}
+	.event__img{
+		height: 300px;
+	}
+	.header{
+		height: 400px;
+	}
+	.header__title{
+		width: 350px;
+	}
+	.title__text{
+		font-size: 20px;
+	}
+	.subtitle{
+		font-size: 16px;
+		line-height: 20px;
+	}
+	
+}
+@media(max-width: 650px){
+	.event__img{
+		height: 200px;
+	}
+	.universities__img{
+		width: 140px;
+		height: 140px;
+	}
+	.firstClassesTitle:after{
+		top: 60px;
+	}
+}
+@media(max-width: 575px){
+	.newsElement{
+		width: 60%;
+		margin: 0 auto 20px;
+	}
+	.universities__img{
+		width: 100px;
+		height: 100px;
+		margin:0 10px;
+	}
+	.regularText{
+		font-size: 12px;
+	}
+	h3{
+		font-size: 18px;
+	}
+	.news__title{
+		font-size: 14px;
+	}
+	.news__date{
+		font-size: 10px;
+	}
+	.news__text{
+		font-size: 12px;
+	}
+	.allNews__link{
+		font-size: 14px;
+	}
+	.header__title{
+		width: 200px;
+	}
+	.title__text{
+		font-size: 16px;
+	}
+	.course__calendar{
+		width: 100px;
+		word-wrap: break-word;
+	}
+	.contacts__title{
+		font-size: 16px;
+	}
+	.contacts__links{
+		margin-bottom:10px;
+	}
+	.contacts p{
+		font-size: 14px;
+	}
+	.userReg form{
+		width: 100%;
+	}
+	.userAuth form{
+		width: 100%;
+	}
+	.userAuth button{
+		width: 100%;
+	}
+	.userReg button{
+		width: 100%;
+	}
+
+}
+@media(max-width: 400px){
+	.universities__img{
+		width: 80px;
+		height: 80px;
+		margin:0 5px;
+	}
 }

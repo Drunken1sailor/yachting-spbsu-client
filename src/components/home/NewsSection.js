@@ -28,7 +28,7 @@ const NewsSection = () => {
 				     	<div className="newsSection__row row scrollableContainer overflow-auto">
 				        {news.length>0 && (news.map((newsElement) => (
 				          	
-							<div key={newsElement.newsId} className="newsElement col-md-3">
+							<div key={newsElement.newsId} className="newsElement col-sm-6 col-md-4 col-lg-3 ">
 								{(() => {
 									let newsURL = `/news?newsID=${newsElement.newsId}`;
 								    let imgPath = newsElement.img;
@@ -37,7 +37,7 @@ const NewsSection = () => {
 								return(
 								<div className="newsBlock">
 									<a className="newsImg" href={newsURL}>
-										<img className="img-fluid" src={imgPath} draggable="false"/>
+										<img src={imgPath} draggable="false"/>
 									</a>
 									<div className="news__title">
 										{newsElement.title}

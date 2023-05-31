@@ -65,8 +65,8 @@ function App() {
   return (
     <main>
         {isVisibleNav && <NavMenu userData={userData} changeSearchValue={changeSearchValue} setIsVisibleSearch={changeVisibleSearch} userName={userStatus} visible={visibleAuthChange}/>}
-        {isVisibleAuth && <UserAuth visible={visibleRegChange}/>}
-        {isVisibleReg && <UserReg visible={visibleRegChange}/>}
+        {/*{isVisibleAuth && <UserAuth visible={visibleRegChange}/>}
+        {isVisibleReg && <UserReg visible={visibleRegChange}/>}*/}
         {isVisibleSearch && <SearchPage searchValue={searchValue}/>}
         <BrowserRouter>
             <Routes>
@@ -81,6 +81,8 @@ function App() {
                 <Route exact path="/orgLk" element={<OrgLkPage userData={userData}/>} />
                 <Route exact path="/search" element={<SearchPage visible={SearchPage}/>} />
                 <Route exact path="/event" element={<EventPage/>} />
+                <Route exact path="/register" element={<UserReg/>} />
+                <Route exact path="/login" element={<UserAuth/>} />
             </Routes>
         </BrowserRouter>
     </main>

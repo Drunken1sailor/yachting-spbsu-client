@@ -4,46 +4,6 @@ import loupeImg from '../img/home/header/loupe.png';
 import loginImg from '../img/user.png'
 import {Navbar, Container, Nav, Form, FormControl,Button, Image} from 'react-bootstrap';
 
-// const UserAuthWindow = () => {
-// 	return(
-// 		<div className="userAuthWindow_bg">
-// 			<div className="userAuthWindow">
-// 				<div className="signIn wrapper">
-// 			      <div className="w-50">
-// 			        <h2 className="text-uppercase text-center">Sign In</h2>
-// 			        <Form onSubmit={handleSubmit}>
-// 			          {success && <Alert variant="success">Success</Alert>}
-// 			          {error && <Alert variant="danger">{error}</Alert>}
-// 			          <Form.Group controlId="formBasicEmail">
-// 			            <Form.Label>Email address</Form.Label>
-// 			            <Form.Control
-// 			              type="email"
-// 			              placeholder="Enter email"
-// 			              value={email}
-// 			              onChange={(event) => setEmail(event.target.value)}
-// 			              required
-// 			            />
-// 			          </Form.Group>
-// 			          <Form.Group controlId="formBasicPassword">
-// 			            <Form.Label>Password</Form.Label>
-// 			            <Form.Control
-// 			              type="password"
-// 			              placeholder="Password"
-// 			              value={password}
-// 			              onChange={(event) => setPassword(event.target.value)}
-// 			              required
-// 			            />
-// 			          </Form.Group>
-// 			          <Button variant="primary" type="submit">
-// 			            Sign In
-// 			          </Button>
-// 			        </Form>
-// 			      </div>
-// 			    </div>
-// 			</div>
-// 		</div>
-// 	);
-// };
 
 const NavMenu = (props) => {
   	const [search, setSearch] = useState("");
@@ -98,9 +58,9 @@ const NavMenu = (props) => {
 								</Button>
 							</Form>
 
-							{!props.userName && <Button  onClick={handleClick} variant="none" className="searchBtn">
+							{!props.userName && <a  href="/register" variant="none" className="searchBtn">
 								<Image className="navImg" src={loginImg} alt="Авторизация" width="30" height="30"/>
-							</Button>}
+							</a>}
 							{isOrganizer && props.userName && <a href="/orgLk" className="userLogo">{props.userName}</a>}
 							{!isOrganizer && props.userName && <a href="/lk" className="userLogo">{props.userName}</a>}
 						</Navbar.Collapse>

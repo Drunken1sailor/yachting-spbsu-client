@@ -50,7 +50,7 @@ const LkPage = (props)=>{
 						<div className="mb-3">{name}</div>
 						{success && <Alert variant="success">Success</Alert>}
 						{error && <Alert variant="danger">{error}</Alert>}
-						<Button variant="primary" onClick={handleClickExit}>ВЫЙТИ</Button>
+						<Button className="logoutBtn" variant="primary" onClick={handleClickExit}>ВЫЙТИ</Button>
 					</div>
 					<div className="col-md-8">
 						<div>

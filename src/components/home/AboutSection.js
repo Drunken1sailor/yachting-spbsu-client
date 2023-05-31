@@ -11,7 +11,7 @@ export default class AboutSection extends Component{
 					<div className="aboutSection__text regularText">
 						<p>Историческое название "Секция яхтинга СПбГУ" (до 28.01.2021г). Бесплатное теоретическое обучение парусному спорту по программе подготовки квалифицированных яхтсменов</p>
 					</div>
-					<div className="row px-5 mb-3 text-justify">
+					<div className="row px-5 mb-3 text-justify regularText">
 						<div className="col-md-6">
 							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur tempora reprehenderit, illo! Beatae rerum velit obcaecati quibusdam ullam sed similique vel nostrum, necessitatibus itaque quos hic quam pariatur. Similique, dolore?
 						</div>
@@ -19,7 +19,7 @@ export default class AboutSection extends Component{
 							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur tempora reprehenderit, illo! Beatae rerum velit obcaecati quibusdam ullam sed similique vel nostrum, necessitatibus itaque quos hic quam pariatur. Similique, dolore?
 						</div>
 					</div>
-					<div className="row px-5 text-justify">
+					<div className="row px-5 text-justify regularText">
 						<div className="col-md-6">
 							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur tempora reprehenderit, illo! Beatae rerum velit obcaecati quibusdam ullam sed similique vel nostrum, necessitatibus itaque quos hic quam pariatur. Similique, dolore?
 						</div>

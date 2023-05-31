@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 import ServerIP from './ServerIP.js';
@@ -13,11 +14,16 @@ const UserReg = (props) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isRecaptcha, setIsRecaptcha] = useState(false);
 
   const handleSubmit = (event) => {
     setError("");
     setSuccess(false);
     event.preventDefault();
+    if(!isRecaptcha){
+      setError("ReCAPTCHA не пройдена!");
+      return;
+    }
     // Axios.post("http://95.163.234.33:3001/register",{
     Axios.post(url,{
       nameReg: name,
@@ -29,7 +35,7 @@ const UserReg = (props) => {
           setError(response.data.message);
         }else{
          setSuccess(true);
-         window.location.reload();
+         window.location.href = '/';
         }
       }).catch((error)=>{
         console.error("Ошибка при выполнении запроса:", error.message);
@@ -37,13 +43,13 @@ const UserReg = (props) => {
       });
   };
 
-  const handleClickAuth = (event) => {
-    event.preventDefault();
-    props.visible(true, false);
-  };
+  const recaptchaChange = (value) =>{
+    if(value){setIsRecaptcha(true)}
+    else{setIsRecaptcha(false)}
+  }
 
   return (
-    <div className="userAuth wrapper userReg">
+    <div className="userReg wrapper">
       <div className="w-50">
         <h2 className="text-uppercase text-center">регистрация</h2>
         <Form onSubmit={handleSubmit}>
@@ -99,10 +105,15 @@ const UserReg = (props) => {
               required
             />
           </Form.Group>
+          <ReCAPTCHA
+            className="recaptcha mt-3 mb-3"
+            sitekey="6LebnFcmAAAAAKG3W1f_cg9ljEJv1xfhfGgDdWWM"
+            onChange={recaptchaChange}
+          />
           <Button variant="primary" type="submit">
             Зарегистрироваться
           </Button>
-          <a className="text-center mt-2" href="#" onClick={handleClickAuth}>
+          <a className="changeFormLink text-center mt-2" href="/login">
             войти
           </a>
         </Form>

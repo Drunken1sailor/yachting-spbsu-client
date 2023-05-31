@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
-import CheckServerConnection from './CheckServerConnection';
 import ServerIP from './ServerIP.js';
 const url = `http://${ServerIP}:3001/login`;
 
 const UserAuth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRecaptcha, setIsRecaptcha] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   
@@ -17,7 +18,11 @@ const UserAuth = (props) => {
     setError("");
     setSuccess(false);
     event.preventDefault();
-      // Axios.post("http://95.163.234.33:3001/register",{
+    if(!isRecaptcha){
+      setError("ReCAPTCHA не пройдена!");
+      return;
+    }
+
     Axios.post(url,{
       email: email,
       password: password }
@@ -27,22 +32,18 @@ const UserAuth = (props) => {
           setError(response.data.message);
         }else{
          setSuccess(true);
-         window.location.reload();
+         window.location.href = '/';
         }
-        console.log(response.data);
       }).catch((error)=>{
-        console.error("Ошибка при выполнении запроса:", error.message);
         setError(error.message);
         setSuccess(false);
       });
-  };
+  };  
 
-  const handleClickReg = (event) => {
-    event.preventDefault();
-    props.visible(false, true);
-  };
-
-
+  const recaptchaChange = (value) =>{
+    if(value){setIsRecaptcha(true)}
+    else{setIsRecaptcha(false)}
+  }
 
   return (
     <div className="userAuth wrapper">
@@ -71,10 +72,16 @@ const UserAuth = (props) => {
               required
             />
           </Form.Group>
+          <ReCAPTCHA
+            className="recaptcha mt-3 mb-3"
+            sitekey="6LebnFcmAAAAAKG3W1f_cg9ljEJv1xfhfGgDdWWM"
+            onChange={recaptchaChange}
+          />
           <Button variant="primary" type="submit">
             Войти
           </Button>
-          <a className="text-center mt-2" href="#" onClick={handleClickReg}>
+
+          <a className="changeFormLink text-center mt-2" href="/register">
             Зарегистрироваться
           </a>
         </Form>

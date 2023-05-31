@@ -11,7 +11,7 @@ export default class CoursesMaterials extends Component {
 			<section className="eventsSection section bg-white text-black">
 				<div className="wrapper">
 					<div className="mb-5">
-						<h3 className="section__title">
+						<h3 className="section__title firstClassesTitle">
 							<p>2023 год. Капитан парусно-моторного судна ГИМС:</p>
 						</h3>
 						<h4 className="courses__title">
