@@ -12,13 +12,13 @@ export default class ParticipantsSection extends Component{
 						участвующие вузы
 					</h3>
 					<div className="d-flex justify-content-center">
-						<a class="universities__img" href="#">
+						<a class="universities__img" href="https://www.sut.ru/">
 							<img src={bonchImg} alt="СПБГУТ" draggable="false"/>
 						</a>
-						<a class="universities__img" href="#">
+						<a class="universities__img" href="https://etu.ru/">
 							<img src={letiImg} alt="ЛЭТИ" draggable="false"/>
 						</a>
-						<a class="universities__img" href="#">
+						<a class="universities__img" href="https://www.spbstu.ru/">
 							<img src={politechImg} alt="ПОЛИТЕХ" draggable="false"/>
 						</a>
 					</div>

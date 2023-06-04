@@ -4,6 +4,7 @@ import {Container} from 'react-bootstrap';
 import newsImg from '../../img/home/news/newsImg.jpg';
 import ServerIP from '../ServerIP';
 const url = `http://${ServerIP}:3001/getNews`;
+const imgLink = `http://${ServerIP}:3001`;
 
 
 
@@ -31,8 +32,7 @@ const NewsSection = () => {
 							<div key={newsElement.newsId} className="newsElement col-sm-6 col-md-4 col-lg-3 ">
 								{(() => {
 									let newsURL = `/news?newsID=${newsElement.newsId}`;
-								    let imgPath = newsElement.img;
-								    imgPath = "http://localhost:3001" + imgPath.replace('./src', '');
+								    let imgPath = imgLink + newsElement.img.replace('./src', '');
 								    let cleanDate = newsElement.date.replace("T21:00:00.000Z","");
 								return(
 								<div className="newsBlock">
