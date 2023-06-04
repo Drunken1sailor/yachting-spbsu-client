@@ -27,9 +27,11 @@ const AddOrganizerSection = () => {
 
     Axios.post(url, formData)
       .then((response) => {
-        console.log(response.data); // Ответ от сервера после сохранения данных в базу данных
-        // Дополнительные действия после успешной отправки данных
-        setSuccess(true);
+        if(response.data.message){
+          setError(response.data.message);
+        }else{
+         setSuccess(true);
+        }
       })
       .catch((error) => {
         console.log(error);
